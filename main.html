@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SUNNIES FACE</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="main-shop.css" />
+  <style>
+    /* Small additions for the user info panel */
+    .user-info.hidden{ display:none }
+    .ui-row{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin:10px 0 16px }
+    .ui-col{ flex:1 }
+    .ui-col--actions{ flex:0 0 auto; display:flex; align-items:flex-start; }
+    .ui-line{ margin:4px 0; color:var(--ink-soft) }
+    .ui-box{ padding:12px; border:1px solid rgba(214,204,194,.85); border-radius:12px; background:rgba(237,237,233,.35) }
+  </style>
+</head>
+<body>
+  <section class="shop-layout" id="top">
+    <div class="bg-overlay"></div>
+
+    <aside class="frame-left">
+      <div class="brand-mini">SUNNIES FACE</div>
+      <nav class="menu">
+        <a href="#" class="menu-item active" id="menu-login">
+            <span class="dot"></span> <span id="menu-login-text">Log in</span>
+        </a>
+
+        <a href="#catalog" class="menu-item nav-hidden" id="menu-shop-all">
+          <span class="dot"></span> All Items
+        </a>
+        <a href="#bestseller" class="menu-item nav-hidden" id="menu-shop-best">
+          <span class="dot"></span> Best Seller
+        </a>
+        <a href="#" class="menu-item cart nav-hidden" id="menu-shop-cart">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7 4h-2a1 1 0 1 0 0 2h1.28l1.9 8.49A2 2 0 0 0 10.12 16h6.92a2 2 0 0 0 1.96-1.59l1.7-8.51A1 1 0 0 0 19.74 4H8.28L7.97 2.73A2 2 0 0 0 6.03 1.3L5 1a1 1 0 0 0-.49 1.94l1.03.27L7 8"></path>
+            </svg>
+            Cart 
+          </div>
+          <span class="badge">0</span>
+        </a>
+      </nav>
+    </aside>
+
+    <div class="center-wrap">
+      <div class="card" id="login-card" aria-hidden="false">
+        <h1 class="brand" id="card-title">LOGIN</h1>
+
+        <div class="user-info hidden" id="user-info-panel" aria-hidden="true">
+          <div class="ui-row">
+            <div class="ui-col">
+              <h3 class="section-heading">Account</h3>
+              <p class="ui-line"><strong>Name:</strong> <span id="ui-name"></span></p>
+              <p class="ui-line"><strong>Email:</strong> <span id="ui-email"></span></p>
+            </div>
+            <div class="ui-col ui-col--actions">
+              <button class="btn btn-light" id="logout-btn" type="button">Log out</button>
+            </div>
+          </div>
+
+          <div class="ui-row">
+            <div class="ui-col">
+              <h3 class="section-heading">Order history</h3>
+              <div class="ui-box" id="ui-orders">
+                <p class="card-subtitle">No orders yet.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="ui-row">
+            <div class="ui-col">
+              <h3 class="section-heading">Address book</h3>
+              <div class="ui-box">
+                <p class="ui-line"><strong></strong> <span id="ui-address"></span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="form" id="login-form" autocomplete="on">
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" placeholder="••••••••" required>
+
+          <div class="row">
+            <label class="remember"><input type="checkbox" name="remember"> Remember me</label>
+            <a href="#" class="link" id="forgot-link">Forgot password?</a>
+          </div>
+
+          <button type="submit" class="btn">Log in</button>
+          <p class="signup">New here? <a href="#" class="link" id="go-register">Sign up</a></p>
+          <p class="msg" id="login-msg" style="margin-top:10px;"> </p>
+        </form>
+      </div>
+
+      <div class="card hidden" id="register-card" aria-hidden="true">
+        <h1 class="brand">Create your account</h1>
+        <form class="form" id="register-form" autocomplete="on">
+          <label for="firstName">First name</label>
+          <input id="firstName" name="firstName" type="text" placeholder="First Name" required>
+
+          <label for="lastName">Last name</label>
+          <input id="lastName" name="lastName" type="text" placeholder="Last Name" required>
+
+          <label for="regEmail">Email</label>
+          <input id="regEmail" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="regPassword">Password</label>
+          <input id="regPassword" name="password" type="password" placeholder="At least 8 characters" minlength="8" required>
+
+          <label for="confirmPassword">Confirm password</label>
+          <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Re-enter password" minlength="8" required>
+
+          <label for="phone">Phone (optional)</label>
+          <input id="phone" name="phone" type="tel" placeholder="+63 9XX XXX XXXX" pattern="^[0-9+\\s()-]{7,}$">
+
+          <div class="row" style="margin-top:8px">
+            <label class="remember"><input type="checkbox" name="terms" required> I agree to the Terms & Privacy</label>
+          </div>
+
+          <button type="submit" class="btn">Create account</button>
+          <p class="signup">Already have an account? <a href="#" class="link" id="go-login">Back to login</a></p>
+          <p class="msg" id="register-msg" style="margin-top:10px;"> </p>
+        </form>
+      </div>
+
+      <div class="card hidden" id="catalog-card" aria-hidden="true">
+        <div class="catalog-head">
+          <h2 class="brand" style="margin-bottom:10px">CATEGORY</h2>
+          <div class="catalog-actions">
+            <span id="welcome-name" class="welcome"></span>
+          </div>
+        </div>
+
+        <div id="catalog" class="categories-grid cards-grid">
+          <a href="#" class="product-card" data-cat="lips">
+            <div class="media media--square product-card__hover-image">
+              <img class="media__img media__img--primary" src="images/lips.jpg" alt="Lips">
+              <img class="media__img media__img--hover"   src="images/lips.jpg" alt="">
+            </div>
+            <div class="card-information__wrapper">
+              <h3 class="card-title">LIPS</h3>
+              <p class="card-subtitle"></p>
+            </div>
+            <div class="product-form__bottom-inputs">
+              <button type="button" class="btn-ghost">View</button>
+            </div>
+          </a>
+
+          <a href="#" class="product-card" data-cat="cheeks">
+            <div class="media media--square product-card__hover-image">
+              <img class="media__img media__img--primary" src="images/cheeks.jpg" alt="Cheeks">
+              <img class="media__img media__img--hover"   src="images/cheeks.jpg" alt="">
+            </div>
+            <div class="card-information__wrapper">
+              <h3 class="card-title">CHEEKS</h3>
+              <p class="card-subtitle"></p>
+            </div>
+            <div class="product-form__bottom-inputs">
+              <button type="button" class="btn-ghost">View</button>
+            </div>
+          </a>
+
+          <a href="#" class="product-card" data-cat="face">
+            <div class="media media--square product-card__hover-image">
+              <img class="media__img media__img--primary" src="images/face.jpg" alt="Face">
+              <img class="media__img media__img--hover"   src="images/face.jpg" alt="">
+            </div>
+            <div class="card-information__wrapper">
+              <h3 class="card-title">FACE</h3>
+              <p class="card-subtitle"></p>
+            </div>
+            <div class="product-form__bottom-inputs">
+              <button type="button" class="btn-ghost">View</button>
+            </div>
+          </a>
+        </div>
+
+        <div id="bestseller" style="margin-top:16px;">
+          <p class="card-subtitle">Best sellers coming soon…</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      const $ = s => document.querySelector(s);
+      const $$ = s => document.querySelectorAll(s);
+      const usersKey = 'vice_users';
+      const sessionKey = 'vice_session_email';
+
+      const loginCard = $('#login-card');
+      const registerCard = $('#register-card');
+      const catalogCard = $('#catalog-card');
+
+      const goRegister = $('#go-register');
+      const goLogin = $('#go-login');
+      const loginForm = $('#login-form');
+      const registerForm = $('#register-form');
+      const loginMsg = $('#login-msg');
+      const registerMsg = $('#register-msg');
+
+      const userInfoPanel = document.getElementById('user-info-panel');
+      const uiName = document.getElementById('ui-name');
+      const uiEmail = document.getElementById('ui-email');
+      const uiAddress = document.getElementById('ui-address');
+
+      const welcomeName = $('#welcome-name');
+
+      // Menu Elements
+      const menuLogin = $('#menu-login');
+      const menuLoginText = $('#menu-login-text');
+      const menuItems = $('#menu-shop-all'); // Changed ID target
+      const logoutBtn = document.getElementById('logout-btn');
+      
+      // All shop-related menu items
+      const shopNavItems = $$('.menu-item.nav-hidden'); 
+
+      function getUsers(){
+        try { return JSON.parse(localStorage.getItem(usersKey)) || []; }
+        catch(e){ return []; }
+      }
+      function saveUsers(list){ localStorage.setItem(usersKey, JSON.stringify(list)); }
+
+      function setSession(email){ localStorage.setItem(sessionKey, email); }
+      function getSession(){ return localStorage.getItem(sessionKey); }
+      function clearSession(){ localStorage.removeItem(sessionKey); }
+
+      // Controls Visual State of Left Menu
+      function updateMenuState(isLoggedIn) {
+        if(isLoggedIn) {
+            // Change "Login" text to "User Information"
+            if(menuLoginText) menuLoginText.textContent = "User Information";
+            
+            // Show Shop Links
+            shopNavItems.forEach(item => item.classList.remove('nav-hidden'));
+        } else {
+            // Change "User Information" text to "Log in"
+            if(menuLoginText) menuLoginText.textContent = "Log in";
+            
+            // Hide Shop Links
+            shopNavItems.forEach(item => item.classList.add('nav-hidden'));
+        }
+      }
+
+      function show(view){
+        [loginCard, registerCard, catalogCard].forEach(el=>{
+          el.classList.add('hidden'); el.setAttribute('aria-hidden','true');
+        });
+        if(view==='login'){ 
+            loginCard.classList.remove('hidden'); 
+            loginCard.setAttribute('aria-hidden','false'); 
+            menuActive('login'); 
+        }
+        if(view==='register'){ 
+            registerCard.classList.remove('hidden'); 
+            registerCard.setAttribute('aria-hidden','false'); 
+            menuActive('login'); 
+        }
+        if(view==='catalog'){ 
+            catalogCard.classList.remove('hidden'); 
+            catalogCard.setAttribute('aria-hidden','false'); 
+            menuActive('items'); 
+        }
+      }
+
+      function menuActive(which){
+        [menuLogin, menuItems].forEach(m => m && m.classList.remove('active'));
+        if(which==='login' && menuLogin) menuLogin.classList.add('active');
+        if(which==='items' && menuItems) menuItems.classList.add('active');
+      }
+
+      function personalize(email){
+        const users = getUsers();
+        const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase());
+        const first = user?.firstName?.trim() || '';
+        const last = user?.lastName?.trim() || '';
+        const fullName = (first || last) ? `${first} ${last}`.trim() : (user?.email || email);
+
+        if(uiName) uiName.textContent = fullName;
+        if(uiEmail) uiEmail.textContent = user?.email || email;
+        if(uiAddress) uiAddress.textContent = `${fullName}, Philippines`;
+        if(welcomeName) welcomeName.textContent = fullName ? `Hi, ${fullName}` : '';
+      }
+
+      function showUserInfo(email){
+        personalize(email);
+        
+        // Update menu to "Logged In" state
+        updateMenuState(true);
+
+        // Reveal the card
+        show('login');
+        
+        // Swap: hide form, show info panel
+        if(userInfoPanel){ userInfoPanel.classList.remove('hidden'); userInfoPanel.setAttribute('aria-hidden','false'); }
+        if(loginForm){ loginForm.classList.add('hidden'); loginForm.setAttribute('aria-hidden','true'); }
+        
+        // Mark left menu active
+        menuActive('login');
+        
+        // Change Title
+        const title = document.getElementById('card-title');
+        if(title) title.textContent = "USER INFORMATION";
+      }
+
+      // Switchers
+      goRegister && goRegister.addEventListener('click', e=>{
+        e.preventDefault(); show('register'); document.getElementById('firstName')?.focus();
+      });
+      goLogin && goLogin.addEventListener('click', e=>{
+        e.preventDefault(); 
+        show('login'); 
+        // Reset Title
+        const title = document.getElementById('card-title');
+        if(title) title.textContent = "LOGIN";
+        document.getElementById('email')?.focus();
+      });
+      
+      menuLogin && menuLogin.addEventListener('click', e=>{
+        e.preventDefault();
+        const s = getSession();
+        if(s){ showUserInfo(s); } else { show('login'); }
+      });
+      
+      menuItems && menuItems.addEventListener('click', e=>{
+        e.preventDefault();
+        const s = getSession();
+        if(s){ show('catalog'); }
+        else { show('login'); if(loginMsg){ loginMsg.style.color = '#b33'; loginMsg.textContent = 'Please log in to view items.'; } }
+      });
+
+      // Register handler
+      registerForm && registerForm.addEventListener('submit', e=>{
+        e.preventDefault();
+        if(registerMsg){ registerMsg.textContent = ''; registerMsg.style.color = '#3a3'; }
+        const firstName = (document.getElementById('firstName').value || '').trim();
+        const lastName = (document.getElementById('lastName').value || '').trim();
+        const email = (document.getElementById('regEmail').value || '').trim();
+        const pass = (document.getElementById('regPassword').value || '').trim();
+        const confirm = (document.getElementById('confirmPassword').value || '').trim();
+        const phone = (document.getElementById('phone').value || '').trim();
+
+        if(pass !== confirm){ if(registerMsg){ registerMsg.style.color = '#b33'; registerMsg.textContent = 'Passwords do not match.'; } return; }
+        const users = getUsers();
+        if(users.some(u=>u.email.toLowerCase()===email.toLowerCase())){
+          if(registerMsg){ registerMsg.style.color = '#b33'; registerMsg.textContent = 'Email already registered.'; }
+          return;
+        }
+        users.push({ firstName, lastName, email, password: pass, phone, createdAt: Date.now() });
+        saveUsers(users);
+        setSession(email);
+        if(registerMsg){ registerMsg.textContent = 'Account created!'; }
+        showUserInfo(email);
+      });
+
+      // Login handler
+      loginForm && loginForm.addEventListener('submit', e=>{
+        e.preventDefault();
+        if(loginMsg){ loginMsg.textContent = ''; loginMsg.style.color = '#3a3'; }
+        const email = (document.getElementById('email').value || '').trim();
+        const pass = (document.getElementById('password').value || '').trim();
+        const users = getUsers();
+        const user = users.find(u=>u.email.toLowerCase()===email.toLowerCase() && u.password===pass);
+        if(!user){
+          if(loginMsg){ loginMsg.style.color = '#b33'; loginMsg.textContent = 'Invalid email or password.'; }
+          return;
+        }
+        setSession(email);
+        if(loginMsg){ loginMsg.textContent = 'Logged in!'; }
+        showUserInfo(email);
+      });
+
+      // Logout (only in User Information panel)
+      logoutBtn && logoutBtn.addEventListener('click', ()=>{
+        clearSession();
+        
+        // Reset Menu to Logged Out State
+        updateMenuState(false);
+
+        // Hide info, show login form
+        if(userInfoPanel){ userInfoPanel.classList.add('hidden'); userInfoPanel.setAttribute('aria-hidden','true'); }
+        if(loginForm){ loginForm.classList.remove('hidden'); loginForm.setAttribute('aria-hidden','false'); }
+        
+        show('login');
+        
+        // Reset Title
+        const title = document.getElementById('card-title');
+        if(title) title.textContent = "LOGIN";
+
+        if(loginMsg){ loginMsg.style.color = '#3a3'; loginMsg.textContent = 'You have been logged out.'; }
+        location.hash = '#top';
+      });
+
+      // Initial
+      const current = getSession();
+      if(current){ showUserInfo(current); } 
+      else { 
+          show('login'); 
+          updateMenuState(false); // Ensure menu is in restricted mode on load if not logged in
+      }
+    })();
+  </script>
+</body>
+</html>

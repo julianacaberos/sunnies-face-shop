@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Contact</title>
+    <link rel="stylesheet" href="frame-shared.css" />
+    <style>
+      .wrap{padding:20px}
+      .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+      input,textarea{width:100%;padding:10px 12px;border:1px solid #e8e6ea;border-radius:10px}
+      button{padding:10px 14px;border-radius:10px;border:0;background:#e84b6a;color:#fff;font-weight:700}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h2>Let’s talk</h2>
+      <form onsubmit="event.preventDefault(); alert('Thanks! I’ll get back to you.');">
+        <div class="form-grid">
+          <input type="text" placeholder="Name" required />
+          <input type="email" placeholder="Email" required />
+        </div>
+        <textarea rows="4" placeholder="Project details"></textarea>
+        <button>Send inquiry</button>
+      </form>
+    </div>
+  </body>
+</html>
